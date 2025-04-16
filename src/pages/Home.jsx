@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Hero from '../components/common/Hero';
 import FeaturedWorkspaces from '../components/listings/FeaturedWorkspaces';
+import PremiumWorkspaces from '../components/listings/PremiumWorkspaces';
 import Features from '../components/common/Features';
 import { motion } from 'framer-motion';
 
@@ -11,6 +12,8 @@ const Home = () => {
       <Hero />
       
       <FeaturedWorkspaces />
+      
+      <PremiumWorkspaces />
       
       <Features />
       

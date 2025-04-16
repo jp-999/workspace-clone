@@ -3,19 +3,22 @@ import { motion } from 'framer-motion';
 import { useLocation } from 'react-router-dom';
 import { getAllWorkspaces, searchWorkspaces } from '../services/workspaceData';
 import WorkspaceCard from '../components/listings/WorkspaceCard';
+import PremiumWorkspaceCard from '../components/listings/PremiumWorkspaceCard';
 
 const Explore = () => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const searchQuery = queryParams.get('search') || '';
   const categoryQuery = queryParams.get('category') || 'All';
+  const premiumQuery = queryParams.get('premium') === 'true' || false;
 
   const [workspaces, setWorkspaces] = useState([]);
   const [filteredWorkspaces, setFilteredWorkspaces] = useState([]);
   const [searchTerm, setSearchTerm] = useState(searchQuery);
   const [selectedCategory, setSelectedCategory] = useState(categoryQuery);
+  const [showPremiumOnly, setShowPremiumOnly] = useState(premiumQuery);
   
-  const categories = ['All', 'Office', 'Studio', 'Coworking', 'Business Center', 'Smart Office', 'Retreat'];
+  const categories = ['All', 'Office', 'Studio', 'Coworking', 'Business Center', 'Smart Office', 'Retreat', 'Luxury', 'Resort', 'Heritage'];
   
   useEffect(() => {
     // Fetch all workspaces
@@ -23,7 +26,7 @@ const Explore = () => {
     setWorkspaces(allWorkspaces);
     
     // Apply initial filters from URL if they exist
-    if (searchQuery || categoryQuery !== 'All') {
+    if (searchQuery || categoryQuery !== 'All' || premiumQuery) {
       let results = allWorkspaces;
       
       if (searchQuery) {
@@ -34,14 +37,18 @@ const Explore = () => {
         results = results.filter(workspace => workspace.category === categoryQuery);
       }
       
+      if (premiumQuery) {
+        results = results.filter(workspace => workspace.premium);
+      }
+      
       setFilteredWorkspaces(results);
     } else {
       setFilteredWorkspaces(allWorkspaces);
     }
-  }, [searchQuery, categoryQuery]);
+  }, [searchQuery, categoryQuery, premiumQuery]);
   
   useEffect(() => {
-    // Filter workspaces based on search term and category
+    // Filter workspaces based on search term, category, and premium status
     let results = workspaces;
     
     if (searchTerm) {
@@ -52,12 +59,20 @@ const Explore = () => {
       results = results.filter(workspace => workspace.category === selectedCategory);
     }
     
+    if (showPremiumOnly) {
+      results = results.filter(workspace => workspace.premium);
+    }
+    
     setFilteredWorkspaces(results);
-  }, [searchTerm, selectedCategory, workspaces]);
+  }, [searchTerm, selectedCategory, showPremiumOnly, workspaces]);
   
   const handleSearch = (e) => {
     e.preventDefault();
     // Search is already handled by the useEffect
+  };
+  
+  const togglePremiumFilter = () => {
+    setShowPremiumOnly(!showPremiumOnly);
   };
   
   return (
@@ -81,7 +96,7 @@ const Explore = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
           >
             <form onSubmit={handleSearch}>
-              <div className="flex flex-col md:flex-row gap-4">
+              <div className="flex flex-col md:flex-row gap-4 mb-4">
                 <div className="flex-1">
                   <div className="relative">
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -115,6 +130,18 @@ const Explore = () => {
                   Search
                 </button>
               </div>
+              
+              <div className="flex items-center">
+                <label className="flex items-center cursor-pointer">
+                  <input 
+                    type="checkbox" 
+                    className="form-checkbox h-4 w-4 rounded border-dark-600 text-primary-500 focus:ring-primary-500"
+                    checked={showPremiumOnly}
+                    onChange={togglePremiumFilter}
+                  />
+                  <span className="ml-2 text-dark-300">Show premium workspaces only</span>
+                </label>
+              </div>
             </form>
           </motion.div>
         </section>
@@ -147,7 +174,11 @@ const Explore = () => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                 >
-                  <WorkspaceCard workspace={workspace} />
+                  {workspace.premium ? (
+                    <PremiumWorkspaceCard workspace={workspace} />
+                  ) : (
+                    <WorkspaceCard workspace={workspace} />
+                  )}
                 </motion.div>
               ))}
             </div>
@@ -164,6 +195,7 @@ const Explore = () => {
                 onClick={() => {
                   setSearchTerm('');
                   setSelectedCategory('All');
+                  setShowPremiumOnly(false);
                 }}
                 className="btn btn-primary"
               >

@@ -46,6 +46,7 @@ const Navbar = () => {
         <div className="hidden md:flex items-center space-x-8">
           <NavLink to="/" label="Home" />
           <NavLink to="/explore" label="Explore" />
+          <NavLink to="/communities" label="Communities" />
           <NavLink to="/about" label="About" />
           <NavLink to="/contact" label="Contact" />
         </div>
@@ -90,6 +91,7 @@ const Navbar = () => {
           <div className="flex flex-col space-y-4">
             <MobileNavLink to="/" label="Home" onClick={() => setIsMenuOpen(false)} />
             <MobileNavLink to="/explore" label="Explore" onClick={() => setIsMenuOpen(false)} />
+            <MobileNavLink to="/communities" label="Communities" onClick={() => setIsMenuOpen(false)} />
             <MobileNavLink to="/about" label="About" onClick={() => setIsMenuOpen(false)} />
             <MobileNavLink to="/contact" label="Contact" onClick={() => setIsMenuOpen(false)} />
             <div className="pt-4 flex space-x-4">

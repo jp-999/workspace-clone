@@ -157,9 +157,9 @@ const workspaces = [
       "Sustainable design"
     ],
     images: [
-      "https://images.unsplash.com/photo-1545079968-1feb76f367d7",
+      "https://plus.unsplash.com/premium_photo-1661954483883-edd65eac3577?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8emVuJTIwZ2FyZGVufGVufDB8fDB8fHww",
       "https://images.unsplash.com/photo-1594732832278-abd644401426",
-      "https://images.unsplash.com/photo-1628157588553-5eeea00af15c"
+      "https://images.unsplash.com/photo-1588471980726-8346cb477a33"
     ],
     featured: false,
     category: "Retreat",
@@ -201,6 +201,143 @@ const workspaces = [
     availableDates: [
       { start: "2023-09-01", end: "2023-11-30" }
     ]
+  },
+  {
+    id: 7,
+    title: "Skyline Penthouse Suite",
+    description: "Luxurious penthouse workspace with panoramic city views. Premium amenities and exclusive access make this perfect for executive meetings and high-profile gatherings.",
+    price: 250,
+    priceUnit: "per day",
+    location: "City Center",
+    city: "Miami",
+    rating: 5.0,
+    reviewCount: 42,
+    capacity: "5-20 people",
+    amenities: [
+      "Panoramic views",
+      "Private elevator",
+      "Executive chef service",
+      "Luxury furnishings",
+      "Outdoor terrace",
+      "Private bar",
+      "Butler service",
+      "Helicopter landing pad access"
+    ],
+    images: [
+      "https://images.unsplash.com/photo-1564013799919-ab600027ffc6",
+      "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6",
+      "https://images.unsplash.com/photo-1622547748225-3fc4abd2cca0"
+    ],
+    featured: true,
+    premium: true,
+    category: "Luxury",
+    type: "Penthouse",
+    availableDates: [
+      { start: "2023-09-01", end: "2023-12-15" }
+    ]
+  },
+  {
+    id: 8,
+    title: "Beachfront Workspace Paradise",
+    description: "Combine work and relaxation in this beachfront workspace with ocean views. Open-air design and resort amenities provide the ultimate work-vacation experience.",
+    price: 180,
+    priceUnit: "per day",
+    location: "Coastal Boulevard",
+    city: "San Diego",
+    rating: 4.9,
+    reviewCount: 57,
+    capacity: "5-30 people",
+    amenities: [
+      "Ocean views",
+      "Beach access",
+      "Outdoor workstations",
+      "Swimming pool",
+      "Beachside cafe",
+      "Water sports equipment",
+      "Sunset happy hour",
+      "Hammock lounges"
+    ],
+    images: [
+      "https://images.unsplash.com/photo-1540541338287-41700207dee6",
+      "https://images.unsplash.com/photo-1573052905904-34ad8c27f0cc",
+      "https://images.unsplash.com/photo-1560448204-603b3fc33dcd"
+    ],
+    featured: true,
+    premium: true,
+    category: "Resort",
+    type: "Beachfront",
+    availableDates: [
+      { start: "2023-09-01", end: "2023-11-15" }
+    ]
+  },
+  {
+    id: 9,
+    title: "Historic Mansion Workspace",
+    description: "Work in elegance within a restored historic mansion. Classic architecture combined with modern amenities offers a unique and prestigious working environment.",
+    price: 220,
+    priceUnit: "per day",
+    location: "Heritage District",
+    city: "Boston",
+    rating: 4.8,
+    reviewCount: 39,
+    capacity: "10-50 people",
+    amenities: [
+      "Period architecture",
+      "Library access",
+      "Grand ballroom meetings",
+      "Formal gardens",
+      "Antique furnishings",
+      "Wine cellar",
+      "Fireplace lounges",
+      "Historic tours"
+    ],
+    images: [
+      "https://images.unsplash.com/photo-1572025442646-866d16c84a54",
+      "https://images.unsplash.com/photo-1541123437800-1bb1317badc2",
+      "https://images.unsplash.com/photo-1574691250077-03a929faece5"
+    ],
+    featured: false,
+    premium: true,
+    category: "Heritage",
+    type: "Mansion",
+    availableDates: [
+      { start: "2023-09-10", end: "2023-10-30" },
+      { start: "2023-11-15", end: "2023-12-20" }
+    ]
+  },
+  {
+    id: 10,
+    title: "Mountain Retreat Workspace",
+    description: "Inspiring mountain views and fresh air to boost creativity and productivity. A perfect blend of rugged nature and comfortable, well-equipped workspaces.",
+    price: 175,
+    priceUnit: "per day",
+    location: "Mountain Range",
+    city: "Denver",
+    rating: 4.7,
+    reviewCount: 48,
+    capacity: "5-25 people",
+    amenities: [
+      "Mountain views",
+      "Hiking trails",
+      "Outdoor decks",
+      "Firepit discussions",
+      "Hot tub",
+      "Ski-in/ski-out",
+      "Lodge restaurant",
+      "Adventure equipment"
+    ],
+    images: [
+      "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4",
+      "https://images.unsplash.com/photo-1543465077-db45d34b88a5",
+      "https://images.unsplash.com/photo-1563911302283-d2bc129e7570"
+    ],
+    featured: false,
+    premium: true,
+    category: "Retreat",
+    type: "Mountain Lodge",
+    availableDates: [
+      { start: "2023-09-15", end: "2023-11-30" }
+    ]
   }
 ];
 
@@ -212,6 +349,11 @@ export const getAllWorkspaces = () => {
 // Function to get featured workspaces
 export const getFeaturedWorkspaces = () => {
   return workspaces.filter(workspace => workspace.featured);
+};
+
+// Function to get premium workspaces
+export const getPremiumWorkspaces = () => {
+  return workspaces.filter(workspace => workspace.premium);
 };
 
 // Function to get a workspace by its ID
@@ -235,4 +377,4 @@ export const searchWorkspaces = (query) => {
     workspace.category.toLowerCase().includes(lowercaseQuery) ||
     workspace.type.toLowerCase().includes(lowercaseQuery)
   );
-}; 
+};

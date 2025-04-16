@@ -9,6 +9,7 @@ import About from './pages/About';
 import Explore from './pages/Explore';
 import Contact from './pages/Contact';
 import ListWorkspace from './pages/ListWorkspace';
+import Communities from './pages/Communities';
 import './index.css';
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/list-workspace" element={<ListWorkspace />} />
+            <Route path="/communities" element={<Communities />} />
             <Route path="*" element={<Home />} />
           </Routes>
         </main>
